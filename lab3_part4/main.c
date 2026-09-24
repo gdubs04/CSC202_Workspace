@@ -61,7 +61,8 @@
 //-----------------------------------------------------------
 void msp_printf(char* buffer, unsigned int value);
 uint32_t set_bit(uint32_t reg_value, uint32_t bit_mask);
-
+uint32_t clear_bit(uint32_t reg_value, uint32_t bit_mask);
+bool check_bit(uint32_t reg_value, uint32_t bit_mask);
 
 
 
@@ -136,7 +137,7 @@ int main(void)
   // READ
   reg_value = *test_reg32;
   // MODIFY
-  reg_value = set_bit(reg_value, BIT_PIE)
+  reg_value = set_bit(reg_value, BIT_PIE);
   // WRITE
   *test_reg32 = reg_value;
 
@@ -153,7 +154,7 @@ int main(void)
   //read
   reg_value = *test_reg32;
   //modify
-  reg_value = set_bit(reg_value, BIT_RD)
+  reg_value = set_bit(reg_value, BIT_RD);
   //write
   *test_reg32 = reg_value;
 
@@ -170,7 +171,7 @@ int main(void)
   //read
   reg_value = *test_reg32;
   //modify
-  reg_value = set_bit(reg_value, BIT_CRS)
+  reg_value = set_bit(reg_value, BIT_CRS);
   //write
   *test_reg32 = reg_value;
 
@@ -188,7 +189,7 @@ int main(void)
   //read
   reg_value = *test_reg32;
   //modify
-  reg_value = set_bit(reg_value, BIT_A3 | BIT_A2 | BIT_A1 | BIT_A0)
+  reg_value = set_bit(reg_value, BIT_A3 | BIT_A2 | BIT_A1 | BIT_A0);
   //write
   *test_reg32 = reg_value;
 
@@ -207,8 +208,13 @@ int main(void)
   
   //read
   reg_value = *test_reg32;
-  //modify
-  reg_value = check_bit(reg_value, BIT_A2)
+
+  if((reg_value & BIT_A2) == BIT_A2){
+    msp_printf("Bit A2 is 1\r\n", 0);
+  }
+  else{
+    msp_printf("Bit A2 is 0\r\n", 0);
+  };
   //write
   *test_reg32 = reg_value;
   msp_printf("\r\n",0);
@@ -224,7 +230,7 @@ int main(void)
   //read
   reg_value = *test_reg32;
   //modify
-  reg_value = clear_bit(reg_value, BIT_A2)
+  reg_value = clear_bit(reg_value, BIT_A2);
   //write
   *test_reg32 = reg_value;
   msp_printf("    --> Test reg = 0x%04X\r\n", *test_reg32);
@@ -239,13 +245,13 @@ int main(void)
   // TODO: Enter your code here for problem 7
 
     //read
-  reg_value = *test_reg32;
-  //modify
-  reg_value = clear_bit(reg_value, BIT_PRS)
-  //write
-  *test_reg32 = reg_value;
-  msp_printf("    --> Test reg = 0x%04X\r\n", *test_reg32);
-  msp_printf("\r\n",0);
+    reg_value = *test_reg32;
+    //modify
+    reg_value = clear_bit(reg_value, BIT_CRS);
+    reg_value = set_bit(reg_value, BIT_PRS);
+    //write
+    
+    *test_reg32 = reg_value;
 
 
   // ***************************************************************************
@@ -261,15 +267,16 @@ int main(void)
 
   // TODO: Enter your code here for problem 8
   
-  if((reg_value & BIT_A2) == 1) 
+  if((reg_value & BIT_A2) == BIT_A2) 
   {
-    msp_print("Bit A2=1 so clearing it")
-    reg_value = clear_bit(reg_value, BIT_A2)
+    msp_printf("Bit A2=1 so clearing it\r\n", 0);
+    reg_value = clear_bit(reg_value, BIT_A2);
   }
   else{
-    msp_print("Bit A2=0 so setting it:")
-    reg_value = set_bit(reg_value, BIT_A2)
-  }
+    msp_printf("Bit A2=0 so setting it\r\n", 0);
+    reg_value = set_bit(reg_value, BIT_A2);
+  };
+  *test_reg32 = reg_value;
   msp_printf("    --> Test reg = 0x%04X\r\n", *test_reg32);
   msp_printf("\r\n",0);
 
@@ -286,16 +293,23 @@ int main(void)
   msp_printf("PROBLEM 9: Testing bit MD & setting mode bits\r\n", 0);
 
   // TODO: Enter your code here for problem 9
-  if((reg_value & BIT_MD) == 0) 
-  {
-    msp_print("Bit MD=0, setting mode=10")
-    reg_value = set_bit(reg_value, BIT_MODE)
-  }
-  else{
-    msp_print("Bit MD=1, setting mode=11")
-    reg_value = set_bit(reg_value, BIT_M0DE)
-  }
+  reg_value = *test_reg32;
 
+if((reg_value & BIT_MD) == 0)
+{
+    msp_printf("Bit MD=0, setting mode=10\r\n", 0);
+
+    reg_value = clear_bit(reg_value, BIT_MODE);
+    reg_value = set_bit(reg_value, 0x0080);
+}
+else
+{
+    msp_printf("Bit MD=1, setting mode=11\r\n", 0);
+
+    reg_value = set_bit(reg_value, BIT_MODE);
+}
+
+*test_reg32 = reg_value;
 
   msp_printf("    --> Test reg = 0x%04X\r\n", *test_reg32);
   msp_printf("\r\n",0);
@@ -309,7 +323,7 @@ int main(void)
   // TODO: Enter your code here for problem 10
 
   reg_value = *test_reg32;
-  reg_value = *test & ~ ALL_BITS;
+  reg_value = reg_value & ~ALL_BITS;
   *test_reg32 = reg_value;
 
   msp_printf("    --> Test reg = 0x%04X\r\n", *test_reg32);
@@ -359,21 +373,6 @@ int main(void)
 //  uint32_t - The modified register value with the specified bit(s) cleared.
 // -----------------------------------------------------------------------------
 //set
-uint32_t set_bit(uint32_t reg_value, uint32_t bit_mask)
-{
-  return(reg_value | bit_mask)
-}
-
-//clear
-uint32_t clear_bit(uint32_t reg_value, uint32_t bit_mask);
-{
-  return(reg_value ~& bit_mask)
-}
-//check
-bool check_bit(uint32_t reg_value, uint32_t bit_mask);
-{
-  return(reg_value & bit_mask )
-}
 //-----------------------------------------------------------------------------
 // DESCRIPTION:
 //  This function checks if the specified bit(s) in a 32-bit register value are
@@ -391,3 +390,34 @@ bool check_bit(uint32_t reg_value, uint32_t bit_mask);
 //  bool - true if the specified bit(s) are set, false otherwise.
 // -----------------------------------------------------------------------------
 // TODO: Enter the code for your functions here
+uint32_t set_bit(uint32_t reg_value, uint32_t bit_mask)
+{
+    return(reg_value | bit_mask);
+}
+
+//clear
+
+uint32_t clear_bit(uint32_t reg_value, uint32_t bit_mask)
+{
+    return(reg_value & ~bit_mask);
+}
+
+//check
+bool check_bit(uint32_t reg_value, uint32_t bit_mask)
+{
+    return((reg_value & bit_mask) == bit_mask);
+}
+
+void msp_printf(char* buffer, unsigned int value)
+{
+    unsigned int i = 0;
+    unsigned int len = 0;
+    char string[80];
+
+    len = sprintf(string, buffer, value);
+
+    for (i = 0; i < len; i++)
+    {
+        UART_out_char(string[i]);
+    }
+}
