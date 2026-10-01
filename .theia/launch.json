@@ -166,6 +166,42 @@
                 "name": "lab4",
                 "resourceId": "/lab4/LaunchPad.c"
             }
+        },
+        {
+            "name": "lab5",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "lab5",
+                "resourceId": "/lab5/lab5_main.c"
+            }
+        },
+        {
+            "name": "lab5 (1)",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "lab5",
+                "resourceId": "/lab5"
+            }
+        },
+        {
+            "name": "lab5 (2)",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "lab5",
+                "resourceId": "/lab5/LaunchPad.c"
+            }
+        },
+        {
+            "name": "lab4 (5)",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "lab4",
+                "resourceId": "/lab4/clock.c"
+            }
         }
     ]
 }
