@@ -202,6 +202,60 @@
                 "name": "lab4",
                 "resourceId": "/lab4/clock.c"
             }
+        },
+        {
+            "name": "lab6",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "lab6",
+                "resourceId": "/lab6/lcd1602.c"
+            }
+        },
+        {
+            "name": "lab6 (1)",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "lab6",
+                "resourceId": "/lab6"
+            }
+        },
+        {
+            "name": "lab6 (2)",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "lab6",
+                "resourceId": "/lab6/lab6_main.c"
+            }
+        },
+        {
+            "name": "lab6 (3)",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "lab6",
+                "resourceId": "/lab6/lcd1602.h"
+            }
+        },
+        {
+            "name": "lab6 (4)",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "lab6",
+                "resourceId": "/lab6/LaunchPad.h"
+            }
+        },
+        {
+            "name": "lab6 (5)",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "lab6",
+                "resourceId": "/lab6/clock.c"
+            }
         }
     ]
 }
