@@ -170,8 +170,6 @@ void run_lab7_part4(void)
 
       msec_delay(20);
 
-      display_on = !display_on;
-
       lcd_set_ddram_addr(LCD_LINE2_ADDR);
       lcd_write_string("                ");
 
