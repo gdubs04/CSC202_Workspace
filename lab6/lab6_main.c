@@ -52,7 +52,7 @@ void run_lab6_part4(void);
 // Define symbolic constants used by the program
 //-----------------------------------------------------------------------------
 #define DELAY_DEBOUNCE (20)
-#define PART_DELAY (1000)
+#define DEBOUNCE_DELAY (1000)
 #define TOTAL_CHAR_LCD (32)
 #define CHAR_PER_LCD (16)
 
@@ -75,11 +75,11 @@ int main(void)
 
   // enter your code here
   run_lab6_part1A();
-  msec_delay(PART_DELAY);
+  msec_delay(DEBOUNCE_DELAY);
 
   wait_for_pb_pressed(PB2_IDX);
   lcd_clear();
-  msec_delay(PART_DELAY);
+  msec_delay(DEBOUNCE_DELAY);
   wait_for_pb_released(PB2_IDX);
   run_lab6_part2();
 
@@ -88,12 +88,12 @@ int main(void)
   lcd_write_string("Press PB 2");
 
   wait_for_pb_pressed(PB2_IDX);
-  msec_delay(PART_DELAY);
+  msec_delay(DEBOUNCE_DELAY);
   lcd_clear();
   wait_for_pb_released(PB2_IDX);
 
   lcd_write_string("Running Part 3");
-  msec_delay(PART_DELAY);
+  msec_delay(DEBOUNCE_DELAY);
   lcd_clear();
   
   run_lab6_part3();
@@ -102,12 +102,12 @@ int main(void)
   lcd_write_string("Press PB 2");
 
   wait_for_pb_pressed(PB2_IDX);
-  msec_delay(PART_DELAY);
+  msec_delay(DEBOUNCE_DELAY);
   lcd_clear();
   wait_for_pb_released(PB2_IDX);
 
   lcd_write_string("Running Part 4");
-  msec_delay(PART_DELAY);
+  msec_delay(DEBOUNCE_DELAY);
   keypad_init();
 
   run_lab6_part4();
