@@ -312,12 +312,30 @@
             }
         },
         {
-            "name": "practice",
+            "name": "lab8_p1",
             "type": "ccs-debug",
             "request": "launch",
             "projectInfo": {
-                "name": "practice",
-                "resourceId": "/practice/main.c"
+                "name": "lab8_p1",
+                "resourceId": "/lab8_p1/lab8_p1main.c"
+            }
+        },
+        {
+            "name": "lab8_p3",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "lab8_p3",
+                "resourceId": "/lab8_p3/lab8_p3main.c"
+            }
+        },
+        {
+            "name": "lab8_p2",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "lab8_p2",
+                "resourceId": "/lab8_p2/lab8_p2main.c"
             }
         }
     ]
